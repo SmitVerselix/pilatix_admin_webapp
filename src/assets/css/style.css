@@ -78,9 +78,9 @@ Toast
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap");
 :root {
   --body-bg:	240 241 247;
-  --primary:	132 90 223;
-  --primary-rgb:	132, 90 ,223;
-  --secondary:	35 183 229;
+  --primary:	63 141 98;
+  --primary-rgb:	63, 141 ,98;
+  --secondary:	141 122 53;
   --warning: 245 184 73;
   --info:	73 182 245;
   --success:	38 191 148;
@@ -6003,7 +6003,7 @@ input.gridjs-input {
 [bg-img=bgimg3].light[data-menu-styles=dark] .app-sidebar,
 [bg-img=bgimg2].light[data-menu-styles=dark] .app-sidebar,
 [bg-img=bgimg1].light[data-menu-styles=dark] .app-sidebar {
-  @apply before:bg-[#111c43]/80;
+  @apply before:bg-[#334e3f]/80;
 }
 [bg-img=bgimg5].light[data-menu-styles=dark] .app-sidebar .main-sidebar-header,
 [bg-img=bgimg4].light[data-menu-styles=dark] .app-sidebar .main-sidebar-header,
@@ -6031,7 +6031,7 @@ input.gridjs-input {
 [bg-img=bgimg3][data-menu-styles=dark] .app-sidebar,
 [bg-img=bgimg2][data-menu-styles=dark] .app-sidebar,
 [bg-img=bgimg1][data-menu-styles=dark] .app-sidebar {
-  @apply before:bg-[#111c43]/80;
+  @apply before:bg-[#334e3f]/80;
 }
 [bg-img=bgimg5][data-menu-styles=dark] .app-sidebar .main-sidebar-header,
 [bg-img=bgimg4][data-menu-styles=dark] .app-sidebar .main-sidebar-header,
@@ -6770,7 +6770,7 @@ input.gridjs-input {
 /* Start Header Styles */
 [data-header-styles=dark] .app-header {
   --header-prime-color: 255 255 255;
-  @apply bg-[#111c43] border-white/10;
+  @apply bg-[#334e3f] border-white/10;
 }
 [data-header-styles=dark] .app-header .main-header-container .header-link-icon {
   @apply hover:bg-white/10 text-white/60 fill-black/60 !important;
@@ -8125,7 +8125,7 @@ input.gridjs-input {
 /* End Menu-Scrollable Styles */
 /* Start Menu Styles */
 [data-menu-styles=dark] .app-sidebar {
-  @apply bg-[#111c43] border-white/10;
+  @apply bg-[#334e3f] border-white/10;
 }
 [data-menu-styles=dark] .app-sidebar .main-sidebar-header {
   @apply backdrop-blur-3xl;
@@ -8138,7 +8138,7 @@ input.gridjs-input {
   @apply block !important;
 }
 [data-menu-styles=dark] .app-sidebar .main-sidebar-header .slide.has-sub .slide-menu {
-  @apply bg-[#111c43] !important;
+  @apply bg-[#334e3f] !important;
 }
 [data-menu-styles=dark][data-vertical-style=overlay][data-toggled=icon-overlay-close]:not([icon-overlay=open]) .app-sidebar .header-logo.toggle-logo {
   @apply lg:hidden;
@@ -8160,7 +8160,7 @@ input.gridjs-input {
     @apply bg-bodybg !important;
   }
   [data-menu-styles=dark][data-nav-style=menu-click][data-toggled=menu-click-closed]:not([data-nav-layout=horizontal]) .app-sidebar .main-sidebar-header, [data-menu-styles=dark][data-nav-style=menu-hover][data-toggled=menu-hover-closed]:not([data-nav-layout=horizontal]) .app-sidebar .main-sidebar-header, [data-menu-styles=dark][data-nav-style=icon-click][data-toggled=icon-click-closed]:not([data-nav-layout=horizontal]) .app-sidebar .main-sidebar-header, [data-menu-styles=dark][data-nav-style=icon-hover][data-toggled=icon-hover-closed]:not([data-nav-layout=horizontal]) .app-sidebar .main-sidebar-header, [data-menu-styles=dark][data-vertical-style=doublemenu]:not([data-nav-layout=horizontal]) .app-sidebar .main-sidebar-header {
-    @apply bg-[#111c43];
+    @apply bg-[#334e3f];
   }
   [data-menu-styles=dark][data-nav-style=menu-click][data-toggled=menu-click-closed]:not([data-nav-layout=horizontal]) .app-sidebar .header-logo.toggle-logo, [data-menu-styles=dark][data-nav-style=menu-hover][data-toggled=menu-hover-closed]:not([data-nav-layout=horizontal]) .app-sidebar .header-logo.toggle-logo, [data-menu-styles=dark][data-nav-style=icon-click][data-toggled=icon-click-closed]:not([data-nav-layout=horizontal]) .app-sidebar .header-logo.toggle-logo, [data-menu-styles=dark][data-nav-style=icon-hover][data-toggled=icon-hover-closed]:not([data-nav-layout=horizontal]) .app-sidebar .header-logo.toggle-logo, [data-menu-styles=dark][data-vertical-style=doublemenu]:not([data-nav-layout=horizontal]) .app-sidebar .header-logo.toggle-logo {
     @apply lg:hidden !important;
@@ -8169,10 +8169,10 @@ input.gridjs-input {
     @apply lg:block !important;
   }
   [data-menu-styles=dark][data-nav-style=menu-click][data-toggled=menu-click-closed]:not([data-nav-layout=horizontal]) .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-style=menu-hover][data-toggled=menu-hover-closed]:not([data-nav-layout=horizontal]) .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-style=icon-click][data-toggled=icon-click-closed]:not([data-nav-layout=horizontal]) .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-style=icon-hover][data-toggled=icon-hover-closed]:not([data-nav-layout=horizontal]) .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-vertical-style=doublemenu]:not([data-nav-layout=horizontal]) .app-sidebar .slide.has-sub .slide-menu {
-    @apply bg-[#111c43] border-white/10 !important;
+    @apply bg-[#334e3f] border-white/10 !important;
   }
   [data-menu-styles=dark][data-nav-style=menu-click][data-toggled=menu-click-closed]:not([data-nav-layout=horizontal]) .app-sidebar .slide-menu .child2, [data-menu-styles=dark][data-nav-style=menu-hover][data-toggled=menu-hover-closed]:not([data-nav-layout=horizontal]) .app-sidebar .slide-menu .child2, [data-menu-styles=dark][data-nav-style=icon-click][data-toggled=icon-click-closed]:not([data-nav-layout=horizontal]) .app-sidebar .slide-menu .child2, [data-menu-styles=dark][data-nav-style=icon-hover][data-toggled=icon-hover-closed]:not([data-nav-layout=horizontal]) .app-sidebar .slide-menu .child2, [data-menu-styles=dark][data-vertical-style=doublemenu]:not([data-nav-layout=horizontal]) .app-sidebar .slide-menu .child2 {
-    @apply bg-[#111c43] border-white/10 !important;
+    @apply bg-[#334e3f] border-white/10 !important;
   }
   [data-menu-styles=dark][data-nav-style=menu-click][data-toggled=menu-click-closed]:not([data-nav-layout=horizontal]) .app-sidebar .slide.side-menu__label1, [data-menu-styles=dark][data-nav-style=menu-hover][data-toggled=menu-hover-closed]:not([data-nav-layout=horizontal]) .app-sidebar .slide.side-menu__label1, [data-menu-styles=dark][data-nav-style=icon-click][data-toggled=icon-click-closed]:not([data-nav-layout=horizontal]) .app-sidebar .slide.side-menu__label1, [data-menu-styles=dark][data-nav-style=icon-hover][data-toggled=icon-hover-closed]:not([data-nav-layout=horizontal]) .app-sidebar .slide.side-menu__label1, [data-menu-styles=dark][data-vertical-style=doublemenu]:not([data-nav-layout=horizontal]) .app-sidebar .slide.side-menu__label1 {
     @apply border-white/10 text-white !important;
@@ -8184,7 +8184,7 @@ input.gridjs-input {
     @apply border-white/10 !important;
   }
   [data-menu-styles=dark][data-nav-layout=horizontal] .app-sidebar .slide.has-sub .slide-menu.child1, [data-menu-styles=dark][data-nav-layout=horizontal] .app-sidebar .slide.has-sub .slide-menu.child2, [data-menu-styles=dark][data-nav-layout=horizontal] .app-sidebar .slide.has-sub .slide-menu.child3 {
-    @apply bg-[#111c43] border-white/10;
+    @apply bg-[#334e3f] border-white/10;
   }
   [data-menu-styles=dark][data-nav-layout=horizontal] .app-sidebar .slide.side-menu__label1 {
     @apply border-white/10 text-white !important;
@@ -9110,7 +9110,7 @@ input.gridjs-input {
 }
 
 .app-sidebar {
-  @apply w-[15rem] h-full bg-[#111c43] dark:bg-bodybg border-e border-e-white/10 fixed top-0 start-0 font-Montserrat z-[49] transition-all ease-linear duration-[0.05s];
+  @apply w-[15rem] h-full bg-[#334e3f] dark:bg-bodybg border-e border-e-white/10 fixed top-0 start-0 font-Montserrat z-[49] transition-all ease-linear duration-[0.05s];
 }
 .app-sidebar .main-sidebar-header {
   @apply h-[3.75rem] w-[15rem] fixed flex dark:bg-bodybg z-[9] items-center justify-center py-[0.813rem] px-5 border-b border-b-white/10 border-e border-e-white/10 transition-all ease-linear duration-[0.05s];
@@ -12787,15 +12787,15 @@ caption {
 }
 
 .MuiSlider-root.MuiSlider-colorPrimary {
-  @apply text-[#845adf];
+  @apply text-[#3f8d62];
 }
 
 .range-slider .range-slider__thumb {
-  @apply bg-[#845adf];
+  @apply bg-[#3f8d62];
 }
 
 .range-slider .range-slider__range {
-  @apply bg-[#845adf];
+  @apply bg-[#3f8d62];
 }
 
 .square-thumb.range-slider .range-slider__thumb {
@@ -14256,8 +14256,8 @@ input.ti-switch {
   --rmsc-border: #e9edf6 !important;
   --rmsc-bg: #fff !important;
   --rmsc-main: #000;
-  --rmsc-selected: #845adf1a !important;
-  --rmsc-hover: #845adf1a !important;
+  --rmsc-selected: #3f8d621a !important;
+  --rmsc-hover: #3f8d621a !important;
   --rmsc-h: 42px !important;
 }
 

@@ -54,6 +54,14 @@ export const MenuItems: any = [
         dirchange: false,
         children: [
             {
+                path: `${BASE}users`,
+                type: 'link',
+                active: false,
+                selected: false,
+                dirchange: false,
+                title: 'All users',
+            },
+            {
                 path: `${BASE}users/add`,
                 type: 'link',
                 active: false,

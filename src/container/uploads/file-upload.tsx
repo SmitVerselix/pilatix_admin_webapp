@@ -4,6 +4,7 @@ import Pageheader from '../../components/common/page-header/pageheader';
 import SpkButton from '../../@spk/uielements/spk-button';
 import Spktables from '../../@spk/tables/spk-tables';
 import TableState from '../../components/common/table/table-state';
+import Select from '../../components/common/form/select';
 import { ApiError } from '../../api/client';
 import type { UploadedFile } from '../../api/types';
 import uploadService from '../../services/upload.service';
@@ -128,7 +129,7 @@ const FileUpload: FC = () => {
                             </div>
 
                             <div className="mt-4">
-                                <label htmlFor="upload-source" className="form-label">
+                                <label id="upload-source-label" htmlFor="upload-source" className="form-label">
                                     Source folder <span className="text-danger">*</span>
                                 </label>
                                 {useCustom ? (
@@ -141,18 +142,15 @@ const FileUpload: FC = () => {
                                         onChange={(e) => setCustomSource(e.target.value)}
                                     />
                                 ) : (
-                                    <select
+                                    <Select
                                         id="upload-source"
-                                        className="form-control"
+                                        size="md"
+                                        labelledBy="upload-source-label"
+                                        icon="ri-folder-line"
                                         value={source}
-                                        onChange={(e) => setSource(e.target.value)}
-                                    >
-                                        {SOURCES.map((value) => (
-                                            <option key={value} value={value}>
-                                                {value}
-                                            </option>
-                                        ))}
-                                    </select>
+                                        onChange={setSource}
+                                        options={SOURCES.map((value) => ({ value, label: value }))}
+                                    />
                                 )}
                                 <div className="form-check !ps-0 mt-2">
                                     <input

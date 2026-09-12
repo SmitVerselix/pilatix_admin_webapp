@@ -2,7 +2,7 @@
 [data-header-styles="dark"] {
   .app-header {
     --header-prime-color: 255 255 255;
-    @apply bg-[#111c43] border-white/10;
+    @apply bg-[#334e3f] border-white/10;
 
     .main-header-container .header-link-icon {
       @apply hover:bg-white/10 text-white/60 fill-black/60 #{!important};

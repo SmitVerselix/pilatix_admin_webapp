@@ -1,7 +1,9 @@
 import { FC, Fragment, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import Pageheader from '../../components/common/page-header/pageheader';
 import SpkButton from '../../@spk/uielements/spk-button';
+import Select from '../../components/common/form/select';
 import { ApiError } from '../../api/client';
 import type { Role, User } from '../../api/types';
 import authService from '../../services/auth.service';
@@ -21,8 +23,8 @@ const EMPTY: FormState = { name: '', email: '', password: '', confirmPassword: '
 
 /**
  * Creates an account through POST /admin/auth/register. The backend requires a
- * roleId, so roles are loaded first; it does not expose a user-list endpoint, so
- * the created account is echoed back here instead of being added to a table.
+ * roleId, so roles are loaded first. New accounts show up under All users
+ * (POST /admin/dashboard/list-users).
  */
 const AddUser: FC = () => {
     const [form, setForm] = useState<FormState>(EMPTY);
@@ -152,23 +154,27 @@ const AddUser: FC = () => {
                                     </div>
 
                                     <div className="xl:col-span-6 col-span-12">
-                                        <label htmlFor="user-role" className="form-label">
+                                        <label id="user-role-label" htmlFor="user-role" className="form-label">
                                             Role <span className="text-danger">*</span>
                                         </label>
-                                        <select
+                                        <Select
                                             id="user-role"
-                                            className="form-control"
+                                            size="md"
+                                            labelledBy="user-role-label"
+                                            placeholder={rolesLoading ? 'Loading roles…' : 'Select a role'}
+                                            invalid={Boolean(errors.roleId)}
                                             value={form.roleId}
-                                            onChange={set('roleId')}
+                                            onChange={(next) => {
+                                                setForm((prev) => ({ ...prev, roleId: next }));
+                                                setErrors((prev) => ({ ...prev, roleId: undefined }));
+                                            }}
                                             disabled={rolesLoading || roles.length === 0}
-                                        >
-                                            <option value="">{rolesLoading ? 'Loading roles…' : 'Select a role'}</option>
-                                            {roles.map((role) => (
-                                                <option key={role.id} value={role.id}>
-                                                    {humanise(role.name)}
-                                                </option>
-                                            ))}
-                                        </select>
+                                            options={roles.map((role) => ({
+                                                value: role.id,
+                                                label: humanise(role.name),
+                                                hint: role.name,
+                                            }))}
+                                        />
                                         {fieldError('roleId')}
                                     </div>
 
@@ -281,10 +287,20 @@ const AddUser: FC = () => {
                                 </ul>
                             ) : (
                                 <p className="text-[0.8125rem] text-[#8c9097] dark:text-white/50 mb-0">
-                                    Accounts you create in this session appear here. The API has no user-list endpoint yet,
-                                    so there is no directory to browse.
+                                    Accounts you create in this session appear here. The full directory lives under{' '}
+                                    <Link to={`${import.meta.env.BASE_URL}users`} className="text-primary">
+                                        All users
+                                    </Link>
+                                    .
                                 </p>
                             )}
+
+                            <Link
+                                to={`${import.meta.env.BASE_URL}users`}
+                                className="ti-btn ti-btn-light !font-medium w-full justify-center !mb-0 mt-3"
+                            >
+                                <i className="ti ti-users me-1"></i>View all users
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,6 @@
 import { FC, Fragment, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Modalsearch from '../modal-search/modalsearch';
 import { ThemeChanger } from '../../../redux/action';
 import store from '../../../redux/store';
 import desktoplogo from "../../../assets/images/brand-logos/desktop-logo.png";
@@ -307,12 +306,6 @@ const Header: FC = ({ local_varaiable, ThemeChanger }: any) => {
 
             <div className="header-content-right">
 
-              <div className="header-element py-[1rem] md:px-[0.65rem] px-2 header-search">
-                <SpkButton Label="Search" buttontype="button" Overlay="#search-modal" customClass="inline-flex flex-shrink-0 justify-center items-center gap-2  rounded-full font-medium focus:ring-offset-0 focus:ring-offset-white transition-all text-xs dark:bg-bgdark dark:hover:bg-black/20 dark:text-[#8c9097] dark:text-white/50 dark:hover:text-white dark:focus:ring-white/10 dark:focus:ring-offset-white/10">
-                  <i className="bx bx-search-alt-2 header-link-icon"></i>
-                </SpkButton>
-              </div>
-
               <div className="header-element header-theme-mode hidden !items-center sm:block !py-[1rem] md:!px-[0.65rem] px-2" onClick={() => ToggleDark()}>
                 <SpkButton Label="Switch to dark mode"
                   customClass="hs-dark-mode-active:hidden flex hs-dark-mode group flex-shrink-0 justify-center items-center gap-2  rounded-full font-medium transition-all text-xs dark:hover:bg-black/20 dark:text-[#8c9097] dark:text-white/50 dark:hover:text-white dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
@@ -397,7 +390,6 @@ const Header: FC = ({ local_varaiable, ThemeChanger }: any) => {
           </div>
         </nav>
       </div>
-      <Modalsearch />
     </Fragment>
   )
 }

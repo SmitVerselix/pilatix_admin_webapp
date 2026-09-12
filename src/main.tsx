@@ -16,7 +16,9 @@ const Loader = lazy(() => import('./components/common/loader/loader.tsx'));
 
 const Dashboard = lazy(() => import('./container/dashboards/dashboard.tsx'));
 const Roles = lazy(() => import('./container/roles/roles.tsx'));
+const Users = lazy(() => import('./container/users/users.tsx'));
 const AddUser = lazy(() => import('./container/users/add-user.tsx'));
+const UserDetail = lazy(() => import('./container/users/user-detail.tsx'));
 const LoginHistory = lazy(() => import('./container/login-history/login-history.tsx'));
 const FileUpload = lazy(() => import('./container/uploads/file-upload.tsx'));
 const Profile = lazy(() => import('./container/profile/profile.tsx'));
@@ -41,7 +43,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                                         <Route index element={<Navigate to={`${BASE}dashboard`} replace />} />
                                         <Route path={`${BASE}dashboard`} element={<Dashboard />} />
                                         <Route path={`${BASE}roles`} element={<Roles />} />
+                                        <Route path={`${BASE}users`} element={<Users />} />
                                         <Route path={`${BASE}users/add`} element={<AddUser />} />
+                                        <Route path={`${BASE}users/:userId`} element={<UserDetail />} />
                                         <Route path={`${BASE}login-history`} element={<LoginHistory />} />
                                         <Route path={`${BASE}uploads`} element={<FileUpload />} />
                                         <Route path={`${BASE}profile`} element={<Profile />} />

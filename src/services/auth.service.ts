@@ -2,16 +2,25 @@ import { request, requestWithMessage } from '../api/client';
 import endpoints from '../api/endpoints';
 import storage from '../api/storage';
 import type { AuthPayload, LoginRequest, RegisterRequest, User } from '../api/types';
+import { describeUserAgent } from '../utils/format';
 
 export const authService = {
-    /** POST /admin/auth/login - deviceType is required by the Joi schema. */
+    /**
+     * POST /admin/auth/login - deviceType is required by the Joi schema.
+     *
+     * The accepted body is exactly: email, password, deviceType, deviceId,
+     * deviceName, pushToken. The validator runs with `stripUnknown: true`, so
+     * anything else is silently dropped rather than rejected - notably
+     * ipAddress and userAgent, which the server reads from the request itself.
+     * `deviceName` is a human label ("Chrome on macOS"), not the raw UA.
+     */
     login: (email: string, password: string) => {
         const body: LoginRequest = {
             email,
             password,
             deviceType: 'web',
             deviceId: storage.getDeviceId(),
-            deviceName: navigator.userAgent.slice(0, 120),
+            deviceName: describeUserAgent(navigator.userAgent),
         };
         return request<AuthPayload>({ url: endpoints.auth.login, method: 'POST', data: body });
     },

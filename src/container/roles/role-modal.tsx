@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import SpkButton from '../../@spk/uielements/spk-button';
+import Select from '../../components/common/form/select';
 import { ApiError } from '../../api/client';
 import { ROLE_NAMES, type Role } from '../../api/types';
 import roleService from '../../services/role.service';
@@ -115,22 +116,22 @@ const RoleModal = ({ open, role, takenNames, onClose, onSaved }: RoleModalProps)
 
                             <div className="grid grid-cols-12 gap-4">
                                 <div className="col-span-12">
-                                    <label htmlFor="role-name" className="form-label">
+                                    <label id="role-name-label" htmlFor="role-name" className="form-label">
                                         Name
                                     </label>
-                                    <select
+                                    <Select
                                         id="role-name"
-                                        className="form-control"
+                                        size="md"
+                                        labelledBy="role-name-label"
+                                        placeholder="Select a role"
                                         value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                    >
-                                        <option value="">Select a role</option>
-                                        {available.map((value) => (
-                                            <option key={value} value={value}>
-                                                {humanise(value)} ({value})
-                                            </option>
-                                        ))}
-                                    </select>
+                                        onChange={setName}
+                                        options={available.map((option) => ({
+                                            value: option,
+                                            label: humanise(option),
+                                            hint: option,
+                                        }))}
+                                    />
                                     <span className="block text-[0.6875rem] text-[#8c9097] dark:text-white/50 mt-1">
                                         {nameOutsideEnum
                                             ? `“${role?.name}” is not in the API's role enum, so renaming it will be rejected - edit the description instead.`

@@ -7,6 +7,7 @@ import SpkButton from '../../@spk/uielements/spk-button';
 import SpkBadge from '../../@spk/uielements/spk-badge';
 import Pagination from '../../components/common/table/pagination';
 import TableState from '../../components/common/table/table-state';
+import Select from '../../components/common/form/select';
 import ConfirmDialog from '../../components/common/confirm-dialog';
 import RoleModal from './role-modal';
 import { ApiError } from '../../api/client';
@@ -14,13 +15,17 @@ import type { Role } from '../../api/types';
 import roleService from '../../services/role.service';
 import { formatDateTime, humanise } from '../../utils/format';
 
-/** Colour per role name, so the badge reads at a glance. */
-const ROLE_COLORS: Record<string, string> = {
-    admin: 'primary',
-    user: 'success',
-    external_user: 'info',
-    guest: 'warning',
+/**
+ * Colour per role name, so the badge reads at a glance. Written as literal
+ * class strings because Tailwind purges anything built as `bg-${name}`.
+ */
+const ROLE_ACCENTS: Record<string, string> = {
+    admin: 'bg-primary/10 text-primary',
+    user: 'bg-success/10 text-success',
+    external_user: 'bg-info/10 text-info',
+    guest: 'bg-warning/10 text-warning',
 };
+const DEFAULT_ACCENT = 'bg-secondary/10 text-secondary';
 
 const Roles: FC = () => {
     const [roles, setRoles] = useState<Role[]>([]);
@@ -158,18 +163,20 @@ const Roles: FC = () => {
                                     />
                                     <i className="ri-search-line absolute start-2 top-1/2 -translate-y-1/2 text-[0.85rem] text-[#8c9097] dark:text-white/50"></i>
                                 </div>
-                                <select
-                                    className="form-control !w-auto !py-[0.45rem] !text-[0.8rem] shrink-0"
-                                    aria-label="Sort order"
+                                <Select
+                                    className="w-[10.5rem] shrink-0"
+                                    ariaLabel="Sort order"
+                                    icon="ri-sort-desc"
                                     value={sortOrder}
-                                    onChange={(e) => {
-                                        setSortOrder(e.target.value as 'ASC' | 'DESC');
+                                    onChange={(next) => {
+                                        setSortOrder(next as 'ASC' | 'DESC');
                                         setPage(1);
                                     }}
-                                >
-                                    <option value="DESC">Newest first</option>
-                                    <option value="ASC">Oldest first</option>
-                                </select>
+                                    options={[
+                                        { value: 'DESC', label: 'Newest first' },
+                                        { value: 'ASC', label: 'Oldest first' },
+                                    ]}
+                                />
                             </div>
                         </div>
 
@@ -203,7 +210,7 @@ const Roles: FC = () => {
                                                 <td>
                                                     <div className="flex items-center gap-2">
                                                         <span
-                                                            className={`avatar avatar-xs avatar-rounded bg-${ROLE_COLORS[role.name] ?? 'secondary'}/10 text-${ROLE_COLORS[role.name] ?? 'secondary'} inline-flex items-center justify-center`}
+                                                            className={`avatar avatar-xs avatar-rounded ${ROLE_ACCENTS[role.name] ?? DEFAULT_ACCENT} inline-flex items-center justify-center`}
                                                         >
                                                             <i className="ti ti-shield-lock text-[0.75rem]"></i>
                                                         </span>

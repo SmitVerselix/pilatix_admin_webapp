@@ -12,6 +12,7 @@ import { useAuth } from '../../auth/use-auth';
 import useThemeColors from '../../hooks/use-theme-colors';
 import loginHistoryService from '../../services/login-history.service';
 import roleService from '../../services/role.service';
+import userService from '../../services/user.service';
 import { describeUserAgent, formatDateTime, humanise } from '../../utils/format';
 
 const BASE = import.meta.env.BASE_URL;
@@ -67,6 +68,10 @@ const Dashboard: FC = () => {
     const [rolesLoading, setRolesLoading] = useState(true);
     const [rolesError, setRolesError] = useState<string | null>(null);
 
+    const [userTotal, setUserTotal] = useState(0);
+    const [usersLoading, setUsersLoading] = useState(true);
+    const [usersError, setUsersError] = useState<string | null>(null);
+
     const [history, setHistory] = useState<LoginHistoryEntry[]>([]);
     const [historyTotal, setHistoryTotal] = useState(0);
     const [historyLoading, setHistoryLoading] = useState(true);
@@ -82,6 +87,21 @@ const Dashboard: FC = () => {
             setRoles([]);
         } finally {
             setRolesLoading(false);
+        }
+    }, []);
+
+    // Only the count is needed here, so ask for the smallest possible page.
+    const loadUserTotal = useCallback(async () => {
+        setUsersLoading(true);
+        setUsersError(null);
+        try {
+            const result = await userService.list({ page: 1, limit: 1 });
+            setUserTotal(result.count ?? 0);
+        } catch (err) {
+            setUsersError(err instanceof ApiError ? err.message : 'Could not load users.');
+            setUserTotal(0);
+        } finally {
+            setUsersLoading(false);
         }
     }, []);
 
@@ -105,7 +125,8 @@ const Dashboard: FC = () => {
     useEffect(() => {
         loadRoles();
         loadHistory();
-    }, [loadRoles, loadHistory]);
+        loadUserTotal();
+    }, [loadRoles, loadHistory, loadUserTotal]);
 
     const activity = useMemo(() => buildActivitySeries(history), [history]);
 
@@ -153,6 +174,7 @@ const Dashboard: FC = () => {
                         onclickfunc={() => {
                             loadRoles();
                             loadHistory();
+                            loadUserTotal();
                         }}
                         variant="outline-secondary"
                         customClass="ti-btn btn-wave !font-medium !text-[0.85rem] !rounded-[0.35rem] !py-[0.51rem] !px-[0.86rem] shadow-none"
@@ -199,18 +221,20 @@ const Dashboard: FC = () => {
                         value={loginCount}
                         hint="In the latest 100 events"
                         icon="login"
-                        color="success"
+                        color="info"
                         loading={historyLoading}
                     />
                 </div>
                 <div className="xxl:col-span-3 sm:col-span-6 col-span-12">
                     <StatCard
-                        title="Known devices"
-                        value={distinctDevices}
-                        hint="Distinct device IDs seen"
-                        icon="devices"
-                        color="info"
-                        loading={historyLoading}
+                        title="User accounts"
+                        value={usersError ? '—' : userTotal}
+                        hint={usersError ?? `${distinctDevices} device${distinctDevices === 1 ? '' : 's'} seen`}
+                        icon="users"
+                        color="success"
+                        to={`${BASE}users`}
+                        linkLabel="Browse"
+                        loading={usersLoading}
                     />
                 </div>
             </div>

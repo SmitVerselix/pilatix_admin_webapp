@@ -1,7 +1,7 @@
 /* Start Menu Styles */
 [data-menu-styles="dark"] {
   .app-sidebar {
-    @apply bg-[#111c43] border-white/10;
+    @apply bg-[#334e3f] border-white/10;
 
     .main-sidebar-header {
       @apply backdrop-blur-3xl;
@@ -17,7 +17,7 @@
       }
 
       .slide.has-sub .slide-menu {
-        @apply bg-[#111c43] #{!important};
+        @apply bg-[#334e3f] #{!important};
       }
     }
   }
@@ -83,7 +83,7 @@
       &:not([data-nav-layout="horizontal"]) {
         .app-sidebar {
           .main-sidebar-header {
-            @apply bg-[#111c43];
+            @apply bg-[#334e3f];
           }
 
           .header-logo {
@@ -97,11 +97,11 @@
           }
 
           .slide.has-sub .slide-menu {
-            @apply bg-[#111c43] border-white/10 #{!important};
+            @apply bg-[#334e3f] border-white/10 #{!important};
           }
 
           .slide-menu .child2 {
-            @apply bg-[#111c43] border-white/10 #{!important};
+            @apply bg-[#334e3f] border-white/10 #{!important};
           }
 
           .slide.side-menu__label1 {
@@ -125,7 +125,7 @@
           &.child1,
           &.child2,
           &.child3 {
-            @apply bg-[#111c43] border-white/10;
+            @apply bg-[#334e3f] border-white/10;
           }
         }
 

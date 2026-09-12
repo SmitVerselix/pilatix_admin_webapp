@@ -133,6 +133,73 @@ export interface RoleListQuery {
     id?: string;
 }
 
+/**
+ * A row from POST /admin/dashboard/list-users. The repository excludes
+ * `passwordHash` and includes only `id` + `name` from the joined role.
+ */
+export interface UserListItem extends Omit<User, 'role'> {
+    role?: Pick<Role, 'id' | 'name'> | null;
+}
+
+/** A row of `devices` on the user-detail response. */
+export interface UserDevice extends BaseRecord {
+    userId: string;
+    deviceId: string | null;
+    deviceType: string | null;
+    deviceName: string | null;
+    ipAddress: string | null;
+    userAgent: string | null;
+    pushToken: string | null;
+    pushTokenUpdatedAt: string | null;
+    lastLogin: string | null;
+}
+
+/**
+ * POST /admin/dashboard/get-user-by-id.
+ *
+ * A narrower column set than the list endpoint (no `currentDeviceId`, and
+ * `isActive` is the only Base field returned), but it adds `lastActiveAt`, the
+ * role's `description`, and the full device list.
+ */
+export interface UserDetail {
+    id: string;
+    name: string | null;
+    email: string | null;
+    mobile: string | null;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
+    roleId: string | null;
+    lastActiveAt: string | null;
+    profileImage: string | null;
+    socialProvider: string | null;
+    socialProviderId: string | null;
+    isEmailVerified: boolean;
+    isPhoneVerified: boolean;
+    role?: Pick<Role, 'id' | 'name' | 'description'> | null;
+    devices?: UserDevice[];
+}
+
+export interface UserLoginHistoryQuery {
+    userId: string;
+    page?: number;
+    limit?: number;
+    sortBy?: 'createdAt';
+    sortOrder?: 'ASC' | 'DESC';
+    /** Matches deviceId, ipAddress, type, status or reason. */
+    search?: string;
+}
+
+export interface UserListQuery {
+    page?: number;
+    limit?: number;
+    sortBy?: 'createdAt' | 'name' | 'email';
+    sortOrder?: 'ASC' | 'DESC';
+    search?: string;
+    roleId?: string;
+    isActive?: boolean;
+}
+
 export interface ProfileUpdateRequest {
     name?: string;
     email?: string;

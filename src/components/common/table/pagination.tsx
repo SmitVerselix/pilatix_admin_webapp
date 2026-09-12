@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import Select from '../form/select';
 
 interface PaginationProps {
     page: number;
@@ -35,18 +36,13 @@ const Pagination = ({ page, totalPages, total, limit, onPageChange, onLimitChang
                         <b className="text-defaulttextcolor dark:text-defaulttextcolor/70">{total}</b> entries
                     </span>
                     {onLimitChange && (
-                        <select
-                            className="form-control !w-auto !py-1 !text-[0.75rem]"
-                            value={limit}
-                            aria-label="Rows per page"
-                            onChange={(e) => onLimitChange(Number(e.target.value))}
-                        >
-                            {LIMITS.map((value) => (
-                                <option key={value} value={value}>
-                                    {value} / page
-                                </option>
-                            ))}
-                        </select>
+                        <Select
+                            className="w-[7.5rem] shrink-0"
+                            ariaLabel="Rows per page"
+                            value={String(limit)}
+                            onChange={(next) => onLimitChange(Number(next))}
+                            options={LIMITS.map((value) => ({ value: String(value), label: `${value} / page` }))}
+                        />
                     )}
                 </div>
 

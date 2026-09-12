@@ -90,7 +90,7 @@
   &.light {
     &[data-menu-styles="dark"] {
       .app-sidebar {
-        @apply before:bg-[#111c43]/80;
+        @apply before:bg-[#334e3f]/80;
 
         .main-sidebar-header {
           @apply bg-transparent #{!important};
@@ -111,7 +111,7 @@
     }
 
     .app-sidebar {
-      @apply before:bg-[#111c43]/80;
+      @apply before:bg-[#334e3f]/80;
 
       .main-sidebar-header {
         @apply bg-transparent #{!important};

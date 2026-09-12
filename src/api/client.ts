@@ -2,10 +2,36 @@ import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import type { ApiEnvelope } from './types';
 import storage from './storage';
 
-export const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api/v1').replace(/\/+$/, '');
+/**
+ * Origin of the API server - scheme, host and port only.
+ *
+ * The `/api/v<n>` segment deliberately lives in `endpoints.ts`, not here, so
+ * that endpoints can sit on different versions at the same time. Putting it in
+ * the env var would pin the whole app to one version.
+ */
+function resolveOrigin(raw: string | undefined): string {
+    const value = (raw || 'http://localhost:8080').trim().replace(/\/+$/, '');
+
+    // Tolerate a value left over from when the version was part of this var -
+    // a deployed env var we cannot edit would otherwise produce /api/v1/api/v1.
+    const versioned = value.match(/^(.*?)\/api\/v\d+$/);
+    if (versioned) {
+        if (import.meta.env.DEV) {
+            console.warn(
+                `[api] VITE_API_BASE_URL should be the origin only; dropping the "${value.slice(versioned[1].length)}" ` +
+                    'suffix. The API version now lives in src/api/endpoints.ts.',
+            );
+        }
+        return versioned[1];
+    }
+
+    return value;
+}
+
+export const API_ORIGIN = resolveOrigin(import.meta.env.VITE_API_BASE_URL);
 
 export const http = axios.create({
-    baseURL: API_BASE_URL,
+    baseURL: API_ORIGIN,
     headers: { 'Content-Type': 'application/json' },
 });
 

@@ -5,6 +5,7 @@ import SpkBadge from '../../@spk/uielements/spk-badge';
 import SpkButton from '../../@spk/uielements/spk-button';
 import Pagination from '../../components/common/table/pagination';
 import TableState from '../../components/common/table/table-state';
+import Select from '../../components/common/form/select';
 import { ApiError } from '../../api/client';
 import type { LoginHistoryEntry } from '../../api/types';
 import loginHistoryService from '../../services/login-history.service';
@@ -73,16 +74,18 @@ const LoginHistory: FC = () => {
                                     </p>
                                 </div>
                                 <div className="flex flex-wrap items-center gap-2">
-                                    <select
-                                        className="form-control !w-auto !py-[0.45rem] !text-[0.8rem] shrink-0"
-                                        aria-label="Filter by event type"
+                                    <Select
+                                        className="w-[9.5rem] shrink-0"
+                                        ariaLabel="Filter by event type"
+                                        icon="ri-filter-3-line"
                                         value={typeFilter}
-                                        onChange={(e) => setTypeFilter(e.target.value as 'all' | 'login' | 'logout')}
-                                    >
-                                        <option value="all">All events</option>
-                                        <option value="login">Logins</option>
-                                        <option value="logout">Logouts</option>
-                                    </select>
+                                        onChange={(next) => setTypeFilter(next as 'all' | 'login' | 'logout')}
+                                        options={[
+                                            { value: 'all', label: 'All events' },
+                                            { value: 'login', label: 'Logins' },
+                                            { value: 'logout', label: 'Logouts' },
+                                        ]}
+                                    />
                                     <SpkButton
                                         buttontype="button"
                                         onclickfunc={load}
