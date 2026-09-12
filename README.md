@@ -275,8 +275,9 @@ elsewhere, which makes the bug especially easy to miss.
 
 ## Brand assets
 
-`brand/pilatix-wordmark.png` is the source artwork. Everything the layout needs
-is derived from it:
+`brand/` holds the source artwork — `pilatix-wordmark.png` (the wide lockup) and
+`pilatix-icon.png` (the square app icon). Everything the layout needs is derived
+from them:
 
 ```bash
 python3 scripts/build-brand-logos.py
@@ -294,10 +295,19 @@ the sidebar is collapsed:
 | `toggle-*.png` | collapsed sidebar | "P" on a cream tile |
 
 The collapsed sidebar renders `toggle-logo.png` under *every* menu style, and
-the sidebar header is transparent — so that one file sits on a dark navy
+the sidebar header is transparent — so that one file sits on the dark green
 background in the default theme and on white under the light menu style. A flat
-mark cannot read on both, so the collapsed mark uses the app-icon treatment (the
-"P" on its own cream/yellow tile), which carries its own background.
+mark cannot read on both, so the collapsed mark keeps its own cream/yellow tile.
+
+The figure is lifted off `pilatix-icon.png` rather than cropped from it: cropping
+keeps the tile's top corners but leaves a flat cut along the bottom, so the
+script selects the brand-green pixels, drops the "Pilatix" wordmark below them
+(unreadable at 16–32px) and re-composites the figure onto a freshly drawn tile.
+Artwork is scaled to fit its *longest* side — the figure's extended leg makes it
+~1.5× wider than tall, and scaling by height alone pushed it into the tile edges.
+
+If `brand/pilatix-icon.png` is ever missing, the script falls back to a "P" cut
+from the wordmark and says so.
 
 To rebrand, replace `brand/pilatix-wordmark.png` and re-run the script; adjust
 the colour constants at the top of it if the palette changes.
